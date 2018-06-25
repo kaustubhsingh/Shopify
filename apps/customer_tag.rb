@@ -28,6 +28,7 @@ class TagCustomers
 def tag_repeat_customers
   tagged_customers = []
   customers.each do |customer|
+    puts "order count for customer is #{customer.orders_count}\n"
     if customer.orders_count > 1
       unless customer.tags.include?("repeat")
         customer.tags += "repeat"
@@ -45,5 +46,9 @@ end
  
 # Called when the file is run on the command line, but not in a require
 if __FILE__ == $PROGRAM_NAME
-  puts TagCustomers.new.test_connection.inspect
+    
+  tagged = TagCustomers.new.tag_repeat_customers
+  puts "Tagged #{tagged.length} customers with 'repeat'"
+  
+  
 end
