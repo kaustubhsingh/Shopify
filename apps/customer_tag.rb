@@ -20,7 +20,27 @@ class TagCustomers
     return ShopifyAPI::Shop.current
   end
   
+  def customers
+    ShopifyAPI::Customer.all
+  end
   
+# Tags repeat customers with the tag "repeat"
+def tag_repeat_customers
+  tagged_customers = []
+  customers.each do |customer|
+    if customer.orders_count > 1
+      unless customer.tags.include?("repeat")
+        customer.tags += "repeat"
+        customer.save
+      end
+      tagged_customers << customer
+    end
+  end
+ 
+  tagged_customers
+end
+
+
 end
  
 # Called when the file is run on the command line, but not in a require
