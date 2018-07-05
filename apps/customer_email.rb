@@ -3,7 +3,6 @@ require 'pry'
 require 'shopify_api'
 require 'net/smtp'
 require 'rubygems'
-require 'mailfactory'
 require 'dotenv'
 Dotenv.load
 
@@ -45,12 +44,14 @@ end
 # Called when the file is run on the command line, but not in a require
 if __FILE__ == $PROGRAM_NAME
     
-  emails = EmailCustomers.new.get_customers_email
-  puts emails
+emails = EmailCustomers.new.get_customers_email
+puts emails
+
+emails.values.each do |x|
 
 message = <<MESSAGE_END
 From: KS_App <shopifyksingh@gmail.com>
-To: KS <shopifyksingh@gmail.com>
+To: #{x}
 MIME-Version: 1.0
 Content-type: text/html
 Subject: Shopify Deals!
@@ -60,7 +61,9 @@ Subject: Shopify Deals!
 MESSAGE_END
 
 Net::SMTP.start('localhost') do |smtp|
-   smtp.send_message message, 'shopifyksingh@gmail.com', 'shopifyksingh@gmail.com'
+   smtp.send_message message, 'shopifyksingh@gmail.com', x
+end
+
 end
 
 end
