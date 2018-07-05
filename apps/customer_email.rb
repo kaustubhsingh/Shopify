@@ -30,7 +30,7 @@ def get_customers_email
   
   customers.each do |customer|
     puts "Customer #{customer.email} accepts marketing #{customer.accepts_marketing}\n"
-
+    customer_emails[customer.id] = customer.email
   end
 
   customer_emails 
@@ -43,6 +43,7 @@ end
 if __FILE__ == $PROGRAM_NAME
     
   emails = EmailCustomers.new.get_customers_email
+  puts emails
 
   
 end
