@@ -2,6 +2,8 @@
 require 'pry'
 require 'shopify_api'
 require 'net/smtp'
+require 'rubygems'
+require 'mailfactory'
 require 'dotenv'
 Dotenv.load
 
@@ -47,14 +49,13 @@ if __FILE__ == $PROGRAM_NAME
   puts emails
 
 message = <<MESSAGE_END
-
+From: KS_App <shopifyksingh@gmail.com>
+To: KS <shopifyksingh@gmail.com>
 MIME-Version: 1.0
 Content-type: text/html
-Subject: Shopify marketing email
+Subject: Shopify Deals!
 
-
-<h1>Greetings!</h1>
-<b>This is a new deal!</b>
+<b>This is a deal!</b>
 
 MESSAGE_END
 
