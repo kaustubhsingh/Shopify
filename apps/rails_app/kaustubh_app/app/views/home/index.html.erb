@@ -15,6 +15,14 @@
 
 <hr>
 
+<%= form_tag("/email_content", method: "post") do %>
+  <%= text_field_tag(:email_content) %>
+  <%= submit_tag("Send Emails") %>
+<% end %>
+  
+  
+
+
 <h2>Webhooks</h2>
 
 <% if @webhooks.present? %>
@@ -26,3 +34,4 @@
 <% else %>
   <p></p>
 <% end %>
+
