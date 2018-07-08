@@ -4,6 +4,15 @@ class HomeController < ShopifyApp::AuthenticatedController
     @webhooks = ShopifyAPI::Webhook.find(:all)
     @customers = ShopifyAPI::Customer.find(:all)
     
-  
   end
+  
+  def getCustomerEmails
+    @emails = []
+  
+    for a in @customers
+      @emails << a.email
+    end
+    
+  end
+  
 end
