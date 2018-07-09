@@ -18,3 +18,12 @@
 <% else %>
   <p></p>
 <% end %>
+
+<h2>Emails</h2>
+
+<ul>
+  <% @emails.each do |email| %>
+    <li><%= email %></li>
+  <% end %>
+</ul>
+
