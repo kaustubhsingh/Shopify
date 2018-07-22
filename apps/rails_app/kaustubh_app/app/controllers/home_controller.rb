@@ -5,8 +5,8 @@ class HomeController < ShopifyApp::AuthenticatedController
 
   end
  
-  def run
-    @emails.each do |user|
+  def run(email_list)
+    email_list.each do |user|
       UserMailer.with(user: user).welcome_email.deliver_now
     end
   end
@@ -18,10 +18,13 @@ class HomeController < ShopifyApp::AuthenticatedController
     @emails = []
   
     for a in @customers
-      @emails << a.email
+    	if a.email.to_s.empty?
+    	else
+			@emails << a.email
+		end
     end
     
-    run 
+    run(@emails) 
     
     render "test"
   
