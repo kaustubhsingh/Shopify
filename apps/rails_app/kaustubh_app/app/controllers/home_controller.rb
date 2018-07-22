@@ -4,6 +4,12 @@ class HomeController < ShopifyApp::AuthenticatedController
     @webhooks = ShopifyAPI::Webhook.find(:all)
 
   end
+ 
+  def run
+    @emails.each do |user|
+      UserMailer.with(user: user).welcome_email.deliver_now
+    end
+  end
   
   def getEmails
 
@@ -14,6 +20,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     for a in @customers
       @emails << a.email
     end
+    
+    run 
     
     render "test"
   
