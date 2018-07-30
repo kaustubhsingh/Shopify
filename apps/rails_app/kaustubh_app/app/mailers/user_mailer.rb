@@ -5,7 +5,8 @@ class UserMailer < ApplicationMailer
   def welcome_email
     @customer_email = params[:user]
     @url  = 'http://example.com/login'
-    mail(to: @customer_email, subject: 'Welcome to My Awesome Site')
+    attachments.inline['banner.jpeg'] = File.read("#{Rails.root}/app/assets/images/banner.jpeg")
+    mail(to: @customer_email, subject: 'Thanks for your purchase!')
   end
   
 end
