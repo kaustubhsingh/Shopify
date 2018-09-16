@@ -6,10 +6,20 @@ reference pages:
 
 =end
 
+require 'httparty'
+
 class Recipe
 
-	api_key = ENV['FOOD2FORK_KEY']
-
-	base_uri "food2fork.com/api/search"
+	include HTTParty
+	 
+	base_uri "https://food2fork.com"
+	
+	def self.fetch_recipes(api_key, query)
+		get("/api/search",  { query: { key: api_key, q: query } })
+	end
 
 end
+
+api_key = ENV['FOOD2FORK_KEY']
+puts api_key
+puts Recipe.fetch_recipes(api_key, "paneer")
