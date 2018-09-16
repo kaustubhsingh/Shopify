@@ -11,14 +11,14 @@ require 'httparty'
 class Recipe
 
 	include HTTParty
-	 
-	base_uri "https://food2fork.com"
+	@@api_key = ENV['FOOD2FORK_KEY']
 	
-	def self.fetch_recipes(api_key, query)
-		get("/api/search",  { query: { key: api_key, q: query } })
+	base_uri "https://food2fork.com/api"
+	
+	def self.fetch_recipes(query)
+		get("/search",  { query: { key: @@api_key, q: query } })
 	end
 
 end
 
-api_key = ENV['FOOD2FORK_KEY']
-pp Recipe.fetch_recipes(api_key, "paneer")
+pp Recipe.fetch_recipes("paneer makhni")
