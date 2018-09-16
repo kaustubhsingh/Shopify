@@ -21,5 +21,4 @@ class Recipe
 end
 
 api_key = ENV['FOOD2FORK_KEY']
-puts api_key
-puts Recipe.fetch_recipes(api_key, "paneer")
+pp Recipe.fetch_recipes(api_key, "paneer")
